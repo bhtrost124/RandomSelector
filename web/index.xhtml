@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Random Selector</title>
+    </h:head>
+    <h:body>
+        <ui:repeat var="series" value="#{selectorBacker.seriesList}">
+            <h:outputText value="#{series.name} :  #{series.eps} behind"/>
+            <h:form>
+                <h:commandButton value="+" action="#{selectorBacker.addEpsBehind(series)}"/>
+                <h:commandButton value="-" action="#{selectorBacker.decEpsBehind(series)}"/>
+                <h:commandButton value="Remove" action="#{selectorBacker.removeSeries(series)}"/>
+            </h:form>
+            <br/>
+        </ui:repeat>
+        <h:form>
+            <h:outputText value="Press For A Random Series  "/>
+            <br/>
+            <h:commandButton action="#{selectorBacker.selectRandomSeries()}" value="Randomize"/>
+            <br/>
+            <c:if test="#{selectorBacker.randSeries != null}">
+                <h:outputText id="result" value="#{selectorBacker.randSeries}"/>
+            </c:if>
+            <br/><br/>
+        </h:form>
+        <h:form>
+            <h:outputText value="Add Series:                       "/>
+            <h:inputText value="#{selectorBacker.series.name}"/>
+            <br/>
+            <h:commandButton value="Submit" action="#{selectorBacker.addSeries}"/>
+        </h:form>
+    </h:body>
+</html>
+
