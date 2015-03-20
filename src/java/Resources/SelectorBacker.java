@@ -24,17 +24,16 @@ public class SelectorBacker {
     @Inject
     private SeriesBean seriesBean;
     private List<Series> serList;
-    private Random rnGesus;
-    private Series series;
+    private final Random rnGesus;
     private String randSeries;
+    private String seriesToAdd;
 
     /**
      * Creates a new instance of SelectorBacker
      */
     public SelectorBacker() {
-        this.series = new Series();
-        this.rnGesus = new Random();
-        
+        this.rnGesus = new Random();      
+        this.seriesToAdd = "";
     }
 
     @PostConstruct
@@ -62,8 +61,10 @@ public class SelectorBacker {
     }
 
     public String addSeries() {
-        this.seriesBean.createSeries(this.series);
-        this.serList.add(this.series);
+        Series added = new Series(this.seriesToAdd);
+        this.seriesBean.createSeries(added);
+        this.serList.add(added);
+        this.seriesToAdd = "";
         return "index.xhtml";
     }
 
@@ -90,9 +91,14 @@ public class SelectorBacker {
     public List<Series> getSeriesList() {
         return this.serList;
     }
-
-    public Series getSeries() {
-        return this.series;
+    
+    public String getSeriesToAdd()
+    {
+        return this.seriesToAdd;
     }
-
+    
+    public void setSeriesToAdd(String s)
+    {
+        this.seriesToAdd = s;
+    }
 }

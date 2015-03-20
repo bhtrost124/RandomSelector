@@ -29,9 +29,9 @@
         </h:form>
         <h:form>
             <h:outputText value="Add Series:                       "/>
-            <h:inputText value="#{selectorBacker.series.name}"/>
+            <h:inputText value="#{selectorBacker.seriesToAdd}"/>
             <br/>
-            <h:commandButton value="Submit" action="#{selectorBacker.addSeries}"/>
+            <h:commandButton value="Submit" action="#{selectorBacker.addSeries()}"/>
         </h:form>
     </h:body>
 </html>

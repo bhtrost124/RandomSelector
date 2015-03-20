@@ -47,8 +47,7 @@ public class SeriesBean {
     
     public void decSeries(Series show)
     {
-        show.decEps();
-        em.merge(show);
+        em.merge(show.decEps());
     }
     
     public List<Series> getAllSeries()
