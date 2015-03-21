@@ -9,23 +9,28 @@
     </h:head>
     <h:body>
         <ui:repeat var="series" value="#{selectorBacker.seriesList}">
-            <h:outputText  value="#{series.name} :  #{series.eps} behind"/>
-            <h:form style="display: inline; float: right; margin-right: 1450px;">
-                <h:commandButton value="+" action="#{selectorBacker.addEpsBehind(series)}"/>
-                <h:commandButton value="-" action="#{selectorBacker.decEpsBehind(series)}"/>
-                <h:commandButton value="Remove" action="#{selectorBacker.removeSeries(series)}"/>
-            </h:form>
-            <br/><br/>
+            <div style="border: 1px solid black; padding-top: 5px; width: 410px; height: 25px;
+                 padding-right: 10px; padding-left: 10px;">
+                <h:outputText  value="#{series.name} :  #{series.eps} behind"/>
+                <h:form style="display: inline; float: right;">
+                    <h:commandButton value="+" action="#{selectorBacker.addEpsBehind(series)}"/>
+                    <h:commandButton value="-" action="#{selectorBacker.decEpsBehind(series)}"/>
+                    <h:commandButton value="Remove" action="#{selectorBacker.removeSeries(series)}"/>
+                </h:form>
+                <br/><br/>
+            </div>
         </ui:repeat>
         <h:form>
+            <br/>
             <h:outputText value="Press For A Random Series"/>
             <br/>
             <h:commandButton action="#{selectorBacker.selectRandomSeries()}" value="Randomize"/>
             <br/>
-            <c:if test="#{selectorBacker.randSeries != null}">
+            <c:if test="#{selectorBacker.isRandSet()}">
                 <h:outputText value="#{selectorBacker.randSeries}"/>
+                <br/>
             </c:if>
-            <br/><br/>
+            <br/>
         </h:form>
         <h:form>
             <h:outputText value="Add Series: "/>

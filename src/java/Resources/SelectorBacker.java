@@ -34,6 +34,11 @@ public class SelectorBacker {
     public SelectorBacker() {
         this.rnGesus = new Random();
         this.seriesToAdd = "";
+        this.randSeries = "";
+    }
+
+    public boolean isRandSet() {
+        return !this.randSeries.equals("");
     }
 
     @PostConstruct
