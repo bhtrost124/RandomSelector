@@ -32,20 +32,19 @@ public class SelectorBacker {
      * Creates a new instance of SelectorBacker
      */
     public SelectorBacker() {
-        this.rnGesus = new Random();      
+        this.rnGesus = new Random();
         this.seriesToAdd = "";
     }
 
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         try {
             this.serList = this.seriesBean.getAllSeries();
         } catch (Exception ex) {
             this.serList = new ArrayList<>();
         }
     }
-    
+
     public void selectRandomSeries() {
         List<Series> randList = new ArrayList<>();
         for (Series s : this.serList) {
@@ -65,18 +64,23 @@ public class SelectorBacker {
         this.seriesBean.createSeries(added);
         this.serList.add(added);
         this.seriesToAdd = "";
+        this.randSeries = "";
         return "index.xhtml";
     }
 
     public String removeSeries(Series series) {
         this.seriesBean.removeSeries(series);
         this.serList.remove(series);
+        this.randSeries = "";
+
         return "index.xhtml";
     }
 
     public String addEpsBehind(Series series) {
         this.seriesBean.incSeries(series);
         this.serList = this.seriesBean.getAllSeries();
+        this.randSeries = "";
+
         return "index.xhtml";
     }
 
@@ -84,6 +88,8 @@ public class SelectorBacker {
         if (series.getEps() != 0) {
             this.seriesBean.decSeries(series);
             this.serList = this.seriesBean.getAllSeries();
+            this.randSeries = "";
+
         }
         return "index.xhtml";
     }
@@ -91,14 +97,12 @@ public class SelectorBacker {
     public List<Series> getSeriesList() {
         return this.serList;
     }
-    
-    public String getSeriesToAdd()
-    {
+
+    public String getSeriesToAdd() {
         return this.seriesToAdd;
     }
-    
-    public void setSeriesToAdd(String s)
-    {
+
+    public void setSeriesToAdd(String s) {
         this.seriesToAdd = s;
     }
 }
