@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <ui:repeat var="series" value="#{selectorBacker.seriesList}">
-            <h:outputText value="#{series.name} :  #{series.eps} behind"/>
+            <h:outputText  value="#{series.name} :  #{series.eps} behind"/>
             <h:form>
                 <h:commandButton value="+" action="#{selectorBacker.addEpsBehind(series)}"/>
                 <h:commandButton value="-" action="#{selectorBacker.decEpsBehind(series)}"/>
@@ -18,12 +18,12 @@
             <br/>
         </ui:repeat>
         <h:form>
-            <h:outputText value="Press For A Random Series  "/>
+            <h:outputText value="Press For A Random Series"/>
             <br/>
             <h:commandButton action="#{selectorBacker.selectRandomSeries()}" value="Randomize"/>
             <br/>
             <c:if test="#{selectorBacker.randSeries != null}">
-                <h:outputText id="result" value="#{selectorBacker.randSeries}"/>
+                <h:outputText value="#{selectorBacker.randSeries}"/>
             </c:if>
             <br/><br/>
         </h:form>
