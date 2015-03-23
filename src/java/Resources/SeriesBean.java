@@ -52,7 +52,9 @@ public class SeriesBean {
     
     public List<Series> getAllSeries()
     {
-        Query query = em.createQuery("Select s From Series s", Series.class);
+        // Uncomment for different sorting behavior, make sure to comment out the switched out behavior
+        // Query query = em.createQuery("Select s From Series s Order By s.epsBehind", Series.class);
+        Query query = em.createQuery("Select s From Series s Order By s.seriesName", Series.class);
         List<Series> showList = query.getResultList();
         return showList;
     }
