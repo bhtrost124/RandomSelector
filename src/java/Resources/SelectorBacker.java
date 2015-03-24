@@ -67,7 +67,7 @@ public class SelectorBacker {
     public String addSeries() {
         Series added = new Series(this.seriesToAdd);
         this.seriesBean.createSeries(added);
-        this.serList.add(added);
+        this.serList = this.seriesBean.getAllSeries();
         this.seriesToAdd = "";
         this.randSeries = "";
         return "index.xhtml";
