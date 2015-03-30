@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Attention: The following code is part of a project that is not "Complete," 
+ *  meaning that updates and other assorted changes have yet to take shape. Also
+ *  note that this was originally written with the intention of nobody but myself 
+ *  seeing or using it.Tthere are some aspects of this code that would not
+ *  be present in a true enterprise application, most notably of which would be 
+ *  attempts to make the usage more "safe," or to prevent the user from making
+ *  changes they did not mean to make.
  */
 package Resources;
 
@@ -16,6 +20,16 @@ import javax.inject.Named;
 /**
  *
  * @author Bryce
+ * 
+ * This Application was designed for a user to keep track of shows that they are
+ * watching, how far behind in that show they are, and in the event of not being
+ * able to decide what to watch randomly selects one for them.
+ * 
+ * This backing bean is application scoped for the reason that I was the only
+ * intended user, thus the series list can be considered as always being present
+ * for the application. It was originally developed as request scoped, and it
+ * worked just fine like that, but I wanted to eliminate the constant database
+ * queries as well as test out other scopes.
  */
 @Named
 @ApplicationScoped
@@ -24,7 +38,7 @@ public class SelectorBacker {
     @Inject
     private SeriesBean seriesBean;
     private List<Series> serList;
-    private final Random rnGesus;
+    private final Random random;
     private String randSeries;
     private String seriesToAdd;
 
@@ -32,7 +46,7 @@ public class SelectorBacker {
      * Creates a new instance of SelectorBacker
      */
     public SelectorBacker() {
-        this.rnGesus = new Random();
+        this.random = new Random();
         this.seriesToAdd = "";
         this.randSeries = "";
     }
@@ -50,6 +64,10 @@ public class SelectorBacker {
         }
     }
 
+    /*
+    Performs the logic to select a random series from the series list. Series that
+    are caught up on are not included in the selection.
+    */
     public void selectRandomSeries() {
         List<Series> randList = new ArrayList<>();
         for (Series s : this.serList) {
@@ -57,7 +75,7 @@ public class SelectorBacker {
                 randList.add(s);
             }
         }
-        this.randSeries = randList.get(this.rnGesus.nextInt(randList.size())).getName();
+        this.randSeries = randList.get(this.random.nextInt(randList.size())).getName();
     }
 
     public String getRandSeries() {
